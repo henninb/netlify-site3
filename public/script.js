@@ -1,3 +1,16 @@
+// Client ID from spotify dashboard
+// const client_id = 'b189b96c428d420988bc622dbe88ce57';
+const client_id = '3eea97dee61f4fbbaa9add653fdff523';
+// const redirect_uri = 'https://site3.brianhenning.xyz/'; // Your redirect uri
+const redirect_uri = 'https://bh-site3.netlify.app/'; // Your redirect uri
+
+  // Restore tokens from localStorage
+let access_token = localStorage.getItem('access_token') || null;
+
+// Get auth code from query params after user has been called back to the redirect uri.
+const args = new URLSearchParams(window.location.search);
+const code = args.get('code');
+
 // Generate Code Verifier
 function generateRandomString(length) {
     let text = '';
@@ -140,17 +153,6 @@ function processTokenResponse(data) {
 }
 
 
-// Client ID from spotify dashboard
-// const client_id = 'b189b96c428d420988bc622dbe88ce57';
-const client_id = '3eea97dee61f4fbbaa9add653fdff523';
-const redirect_uri = 'https://site3.brianhenning.xyz/'; // Your redirect uri
-
-  // Restore tokens from localStorage
-let access_token = localStorage.getItem('access_token') || null;
-
-// Get auth code from query params after user has been called back to the redirect uri.
-const args = new URLSearchParams(window.location.search);
-const code = args.get('code');
 
 // This javascript will either be run when the user initially loads the page, or when the user
 // is redirected back to the page after they have accepted the scopes.
