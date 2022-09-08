@@ -57,7 +57,7 @@ function generateUrlWithSearchParams(url, params) {
 // this code is then exchanged for an access token.
 const scope = 'user-read-currently-playing'
 
-function redirectToSpotifyAuthorizeEndpoint() {
+function redirectToAuthorizeEndpoint() {
     const codeVerifier = generateRandomString(64);
 
     generateCodeChallenge(codeVerifier).then((code_challenge) => {
@@ -105,8 +105,6 @@ function exchangeToken(code) {
   })
 }
 
-
-
   // can be called to clear local storage and reload window
 function logout() {
   localStorage.clear();
@@ -131,7 +129,6 @@ function show(input){
   }
 }
 
-
 // Process the response upon sending the auth code to the auth server.
 // Get the access token.
 function processTokenResponse(data) {
@@ -152,8 +149,6 @@ function processTokenResponse(data) {
   console.log(`Access_token in local Storage: ${localStorage.getItem('access_token')}`)
 }
 
-
-
 // This javascript will either be run when the user initially loads the page, or when the user
 // is redirected back to the page after they have accepted the scopes.
 // If the user is redirected back to the page, then the code will be in the query params.
@@ -172,7 +167,7 @@ if (code) {
 }
 
 document.getElementById('login-button')
-        .addEventListener('click', () => {redirectToSpotifyAuthorizeEndpoint()}, false);
+        .addEventListener('click', () => {redirectToAuthorizeEndpoint()}, false);
 
 document.getElementById('logout-button').addEventListener('click', () => {logout()}, false);
 
