@@ -141,7 +141,8 @@ function processTokenResponse(data) {
 
 
 // Client ID from spotify dashboard
-const client_id = 'b189b96c428d420988bc622dbe88ce57';
+// const client_id = 'b189b96c428d420988bc622dbe88ce57';
+const client_id = '3eea97dee61f4fbbaa9add653fdff523';
 const redirect_uri = 'https://site3.brianhenning.xyz/'; // Your redirect uri
 
   // Restore tokens from localStorage

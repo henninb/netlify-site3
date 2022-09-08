@@ -6,7 +6,7 @@
 
 body {
     padding: 50px;
-    background: linear-gradient(90deg,#78E3FD,#ee6c80);
+    /* background: linear-gradient(90deg,#78E3FD,#ee6c80); */
     background-attachment: fixed; 
     font-family: 'Cabin', san-serif;
     display: flex;
