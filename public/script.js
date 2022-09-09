@@ -4,9 +4,8 @@ const fetch_token_endpoint = 'https://api.spotify.com/v1/me?access_token';
 const fetch_current_song_endpoint = 'https://api.spotify.com/v1/me/player/currently-playing';
 
 const client_id = '3eea97dee61f4fbbaa9add653fdff523';
-// const redirect_uri = 'https://site3.brianhenning.xyz/'; // Your redirect uri
-const redirect_uri = 'https://bh-site3.netlify.app/'; // Your redirect uri
-
+const redirect_uri = 'https://site3.brianhenning.xyz/'; // Your redirect uri
+// const redirect_uri = 'https://bh-site3.netlify.app/'; // Your redirect uri
 
   // Restore tokens from localStorage
 let access_token = localStorage.getItem('access_token') || null;
@@ -54,7 +53,6 @@ function generateUrlWithSearchParams(url, params) {
     return urlObject.toString();
 }
 
-
 // Send user to the auth url.
 // If they accept the below scope, then then they will
 // be sent to the redirect URL with a code in the query params.
@@ -80,8 +78,7 @@ function redirectToAuthorizeEndpoint() {
         },
       )
     });
-  }
-
+}
 
 // now that we have an auth code, we must provide the verifier along with
 // the redirect uri, and client id
@@ -110,7 +107,6 @@ function exchangeToken(code) {
   })
 }
 
-  // can be called to clear local storage and reload window
 function logout() {
   localStorage.clear();
   window.location.reload();
@@ -124,7 +120,7 @@ async function addThrowErrorToFetch(response) {
   }
 }
 
-function show(input){
+function show(input) {
   if (input === 'login'){
     document.getElementById('login').style.display = 'unset';
     document.getElementById('loggedin').style.display = 'none';
@@ -158,7 +154,6 @@ function processTokenResponse(data) {
 // is redirected back to the page after they have accepted the scopes.
 // If the user is redirected back to the page, then the code will be in the query params.
 // If the user is initially loading the page, then the code will be null.
-
 
 if (code) {
   exchangeToken(code);
