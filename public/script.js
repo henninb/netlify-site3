@@ -1,8 +1,12 @@
-// Client ID from spotify dashboard
-// const client_id = 'b189b96c428d420988bc622dbe88ce57';
+const authorize_endpoint = 'https://accounts.spotify.com/authorize';
+const exchange_token_endpoint = 'https://accounts.spotify.com/api/token';
+const fetch_token_endpoint = 'https://api.spotify.com/v1/me?access_token';
+const fetch_current_song_endpoint = 'https://api.spotify.com/v1/me/player/currently-playing';
+
 const client_id = '3eea97dee61f4fbbaa9add653fdff523';
 // const redirect_uri = 'https://site3.brianhenning.xyz/'; // Your redirect uri
 const redirect_uri = 'https://bh-site3.netlify.app/'; // Your redirect uri
+
 
   // Restore tokens from localStorage
 let access_token = localStorage.getItem('access_token') || null;
@@ -64,7 +68,8 @@ function redirectToAuthorizeEndpoint() {
       window.localStorage.setItem('code_verifier', codeVerifier);
 
       window.location = generateUrlWithSearchParams(
-        'https://accounts.spotify.com/authorize',
+        authorize_endpoint,
+        // 'https://accounts.spotify.com/authorize',
         {
           response_type: 'code',
           client_id,
@@ -84,7 +89,7 @@ function exchangeToken(code) {
   console.log("Getting code_verifier, getting access token. Auth code: " + code);
   const code_verifier = localStorage.getItem('code_verifier');
 
-  fetch('https://accounts.spotify.com/api/token', {
+  fetch(exchange_token_endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
