@@ -39,6 +39,35 @@ body {
     overflow-x: hidden;
 }
 
+/* ── Site Nav ───────────────────────────────────── */
+
+.site-nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.site-nav a {
+    color: var(--text-2);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.site-nav a:hover {
+    color: var(--green);
+    border-color: var(--green);
+}
+
 /* ── Background ─────────────────────────────────── */
 
 .bg-grid {
