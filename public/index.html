@@ -2,56 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>OAUTH - PKCE example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify · Now Playing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
     <header>
         <div id="loggedin">
-            <button type="button" id="logout-button">logout</button>
-            <button type="button" id="getCurrent">get-song</button>
+            <button type="button" id="logout-button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Logout
+            </button>
+            <div class="hero-logged-in">
+                <div class="logo-mark">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                </div>
+                <span class="hero-subtitle">What are you listening to?</span>
+                <button type="button" id="getCurrent">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    Get Current Song
+                </button>
+            </div>
         </div>
     </header>
-    <div id="login">
-        <h1> log in to find your current song </h1>
-        <button id="login-button">Login</button>
-        <br><br>
 
-        <div id="intro">
-            This is a demonstration of using OAuth to authenticate with Spotify.<br>
-            This login flow uses <b>PKCE (Proof Key for Code Exchange)</b>, <br>
-            so the website doesn't have to expose the client secret in the source code.
+    <main>
+        <div id="login">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="wordmark">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                        Now Playing
+                    </div>
+                    <h1>Find your current<br><em>song</em></h1>
+                    <p class="login-desc">A live demo of Spotify OAuth with PKCE — no client secret exposed.</p>
+                </div>
+
+                <button id="login-button">
+                    Connect with Spotify
+                </button>
+
+                <div class="steps-container">
+                    <div class="steps-label">How it works</div>
+                    <div id="step1" class="step">
+                        <div class="step-num">01</div>
+                        <div class="step-body">
+                            <div class="step-title">Code Verifier</div>
+                            <div class="step-text">A random 64-char alphanumeric string is generated locally — your Code Verifier.</div>
+                            <pre id="code-verifier"></pre>
+                        </div>
+                    </div>
+                    <div id="step2" class="step">
+                        <div class="step-num">02</div>
+                        <div class="step-body">
+                            <div class="step-title">Code Challenge</div>
+                            <div class="step-text">You're redirected to Spotify with a SHA-256 hash of the verifier — the Code Challenge. Only this page knows the original.</div>
+                        </div>
+                    </div>
+                    <div id="step3" class="step">
+                        <div class="step-num">03</div>
+                        <div class="step-body">
+                            <div class="step-title">Token Exchange</div>
+                            <div class="step-text">Spotify returns an auth code. We exchange it for an access token by proving we hold the original verifier — no secret needed.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="step1">
-            <b>1.</b> First, the website generates a random alphanumeric string of <br>
-            length 64, the Code Verifier.
+        <div id="content"></div>
+        <div id="recommend" style="display:none"></div>
+    </main>
 
-            <pre id="code-verifier"></pre>
-        </div>
-
-        <div id="step2">
-            <b>2.</b> You will then be redirected to the Spotify login page, <br>
-            where you will be asked to log in and confirm that you are okay with <br>
-            the permissions that the website is requesting. The URL that takes <br>
-            you to the Spotify login page will contain a HASH of the Code Verifier! <br>
-            This is the Code Challenge.
-            <br><br>
-            Only this website knows the actual Code Verifier. This will be useful later on.
-        </div>
-
-        <div id="step3">
-            <b>3.</b> If you give the needed permission, you will be redirected <br>
-            back here again, with an auth code. <br>
-            The website can exchange this auth code for an access token! <br>
-            This access token will allow the website to access your data through <br>
-            Spotify's API. We provide the unhashed Code Verifier to the Spotify API <br>
-            in this step, so that the API can verify that we are the same website <br>
-            that got you to login in with your account.
-        </div>
-    </div>
-
-    <div id="content">
-    </div>
     <script src="script.js"></script>
 </body>
 </html>
